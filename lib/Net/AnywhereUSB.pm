@@ -7,6 +7,7 @@ use LWP;
 use HTML::TreeBuilder;
 use IO::Socket::SSL;
 use Net::AnywhereUSB::System::Information;
+use Net::AnywhereUSB::System::Network;
 use Net::AnywhereUSB::System::Summary;
 
 our $VERSION = '0.1';
@@ -57,10 +58,10 @@ sub __init {
 }
 
 sub summary {
-	return $_[0]->__home()
+	return $_[0]->__system_summary()
 }
 
-sub __home {
+sub __system_summary {
 	my $self = shift;
 
 	my $s = $self->__tb->parse_content( $self->__get( __home_uri() ) );
@@ -115,6 +116,35 @@ sub __system_information {
 	return Net::AnywhereUSB::System::Information->new( %d )
 }
 
+sub network_information {
+	return $_[0]->__network_information
+}
+
+sub __network_information {
+	my $self = shift;
+
+	my $s = $self->__tb->parse_content( $self->__get( __network_information_uri() ) );
+
+	my @h = $s->look_down( _tag => 'td', class => 'field-label' );
+	map {
+		$_ = $_->as_trimmed_text( extra_chars => '\xA0' );
+		$_ =~ s/://;
+		$_ =~ tr/A-Z ./a-z_/s;
+		$_
+	} @h;
+
+	my @v = $s->look_down( _tag => 'td', class => qr/field-value.*/ );
+	map {
+		$_ = $_->as_trimmed_text( extra_chars => '\xA0' ); 
+		$_
+	} @v;
+
+	my %d;
+	@d{ @h } = @v;
+
+	return Net::AnywhereUSB::System::Network->new( %d )
+}
+
 sub __get {
 	my ( $self, $uri ) = @_;
 
@@ -150,6 +180,10 @@ sub __home_uri {
 
 sub __system_information_uri {
 	return '/admin/sysinfo/general_stats.htm'
+}
+
+sub __network_information_uri {
+	return '/admin/sysinfo/network_stats.htm'
 }
 
 sub __ua {

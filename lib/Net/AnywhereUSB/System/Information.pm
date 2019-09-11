@@ -50,12 +50,6 @@ sub __init {
 	}
 }
 
-sub memory_raw {
-	my $self = shift;
-
-	return ( split( " ", $self->total_memory, 1 ) )[0]
-}
-
 1;
 
 __END__
