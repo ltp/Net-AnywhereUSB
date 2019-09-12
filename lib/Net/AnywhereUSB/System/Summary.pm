@@ -3,6 +3,27 @@ package Net::AnywhereUSB::System::Summary;
 use strict;
 use warnings;
 
+our @ATTR = qw(
+	contact
+	description
+	device_id
+	ethernet_ip_address
+	ethernet_mac_address
+	location
+	model
+);
+
+{
+no strict 'refs';
+
+	for my $attr ( @ATTR ) {
+		*{ __PACKAGE__ ."::$attr" } = sub {
+			my $self = shift;
+			return $self->{ $attr }
+		}
+	}
+}
+
 sub new {
 	my ( $class, %args ) = @_;
 
@@ -15,8 +36,9 @@ sub new {
 sub __init {
 	my ( $self, %args ) = @_;
 
-	use Data::Dumper;
-	print Dumper( %args );
+	for my $attr ( @ATTR ) {
+		$self->{ $attr } = $args{ $attr }
+	}
 }
 
 1;
