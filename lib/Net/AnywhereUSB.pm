@@ -200,22 +200,82 @@ __END__
 
 =head1 NAME
 
-Net::AnywhereUSB - The great new Net::AnywhereUSB!
+Net::AnywhereUSB - Simple Perl interface to Digi AnywhereUSB devices.
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
-
-Perhaps a little code snippet.
+This module provides a simple interface for monitoring Digi AnywhereUSB 
+devices.
 
     use Net::AnywhereUSB;
 
-    my $foo = Net::AnywhereUSB->new();
+    my $n = Net::AnywhereUSB->new(
+        username => 'root',
+        password => 'p@55w0rd',
+        server   => 'my-usb-anywhere-device.domian.com'
+    );
+
+    # Print some basic system information
+    my $sysinfo = $n->system_information();
+    printf( "Model: %s - Firmware: %s\nUptime: %s\n",
+            $sysinfo->model,
+            $sysinfo->firmware_version,
+            $sysinfo->up_time
+    );
+
+    # Check and report on memory consumption
+    if ( ( ( $sysinfo->used_memory->value 
+             / $sysinfo->total_memory->value ) * 100 ) >= 85 ) {
+        print "Memory consumption exceeds 85%\n";
+        # send alert or take action ...
+    }
+    
     ...
 
-=head1 SUBROUTINES
+=head1 METHODS
 
-=head2 function1
+=head2 new ( %args )
+
+Constructor; creates a new Net::AnywhereUSB object representing a connection to
+a Digi Anywhere USB device.  the constructor takes three mandatory and three
+optional parameters.  The three mandatory parameters are:
+
+=over3
+
+=item username
+
+The username with which to authenticate to the device.
+
+=item password
+
+The password with which to authenticate to the device.
+
+=item server
+
+The hostname or IP address of the Dig AnywhereUSB device.
+
+=back
+
+The three optional parameters are:
+
+=over3
+
+=item timeout
+
+The timeout period in seconds to use when establising a connection to the Digi
+AnywhereUSB device.  Defaults to 10 seconds.
+
+=item proto
+
+The protocol to use when connecting to the Digi AnywhereUSB device - either one
+of http or https.  Defaults to https.
+
+=item ssl_verify
+
+A boolean value indicating if the module shoud verify the validity of the Digi
+AnywhereUSB device SSL certificate.  Defaults to false (don't verify).
+
+=back
 
 =head1 AUTHOR
 
