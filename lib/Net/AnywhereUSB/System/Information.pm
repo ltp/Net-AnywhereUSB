@@ -27,19 +27,21 @@ our @ATTR = qw(
 { 
 no strict 'refs';
 
-	for my $attr ( grep !/(flash|memory)/, @ATTR ) {
+	for my $attr ( @ATTR ) {
 		*{ __PACKAGE__ . "::$attr" } = sub {
 			my $self = shift;
-			return $self->{ $attr }
+			return ( $attr =~ /(flash|memory)/
+				? Net::AnywhereUSB::Common::Value->new( $self->{ $attr } )
+				: $self->{ $attr } );
 		}
 	}
 
-	for my $attr ( grep /(flash|memory)/, @ATTR ) {
-		*{ __PACKAGE__. "::$attr\_raw" } = sub {
-			my $self = shift;
-			return Net::AnywhereUSB::Common::Value->new( $self->{ $attr } )
-		}
-	}
+#	for my $attr ( grep /(flash|memory)/, @ATTR ) {
+#		*{ __PACKAGE__. "::$attr" } = sub {
+#			my $self = shift;
+#			return Net::AnywhereUSB::Common::Value->new( $self->{ $attr } )
+#		}
+#	}
 }
 
 sub new {
