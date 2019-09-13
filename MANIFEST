@@ -1,11 +1,13 @@
 Changes
 lib/Net/AnywhereUSB.pm
+lib/Net/AnywhereUSB/Common/Value.pm
 lib/Net/AnywhereUSB/System/Information.pm
 lib/Net/AnywhereUSB/System/Network.pm
 lib/Net/AnywhereUSB/System/Summary.pm
 Makefile.PL
 MANIFEST
 README
+README.md
 t/00-load.t
 t/manifest.t
 t/pod-coverage.t
