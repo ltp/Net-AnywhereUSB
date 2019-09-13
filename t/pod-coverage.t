@@ -19,7 +19,11 @@ if ( $@ ) {
 	plan skip_all => "Pod::Coverage $min_pc required for testing POD coverage"
 }
 else {
-	plan tests => 1
+	plan tests => 2
 }
 
 pod_coverage_ok( 'Net::AnywhereUSB' );
+pod_coverage_ok( 'Net::AnywhereUSB::Common::Value',		{ also_private => [ 'new' ] } );
+pod_coverage_ok( 'Net::AnywhereUSB::System::Information',	{ also_private => [ 'new' ] } );
+pod_coverage_ok( 'Net::AnywhereUSB::System::Network',		{ also_private => [ 'new' ] } );
+pod_coverage_ok( 'Net::AnywhereUSB::System::Summary',		{ also_private => [ 'new' ] } );
