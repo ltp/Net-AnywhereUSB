@@ -198,6 +198,8 @@ sub __tb {
 
 __END__
 
+=pod
+
 =head1 NAME
 
 Net::AnywhereUSB - Simple Perl interface to Digi AnywhereUSB devices.
@@ -240,7 +242,7 @@ Constructor; creates a new Net::AnywhereUSB object representing a connection to
 a Digi Anywhere USB device.  the constructor takes three mandatory and three
 optional parameters.  The three mandatory parameters are:
 
-=over3
+=over 3
 
 =item username
 
@@ -258,7 +260,7 @@ The hostname or IP address of the Dig AnywhereUSB device.
 
 The three optional parameters are:
 
-=over3
+=over 3
 
 =item timeout
 
@@ -277,9 +279,25 @@ AnywhereUSB device SSL certificate.  Defaults to false (don't verify).
 
 =back
 
+=head2 summary ( )
+
+Returns summary information of the Digi AnywhereUSB device as a 
+L<Net::AnywhereUSB::System::Summary> object.
+
+=head2 system_information ( )
+
+Returns detailed system information for the Digi AnywhereUSB device as a
+L<Net::AnywhereUSB::System::Information> object.
+
+=head2 network_information ( )
+
+Returns detailed network information for the Digi AnywhereUSB device as a
+L<Net::AnywhereUSB::Network::Information> object.
+
+
 =head1 AUTHOR
 
-Luke Poskitt, C<< <lukep at Net.edu.au> >>
+Luke Poskitt, C<< <luke.poskitt at gmail.com> >>
 
 =head1 BUGS
 
@@ -314,8 +332,6 @@ L<http://cpanratings.perl.org/d/Net-AnywhereUSB>
 L<http://search.cpan.org/dist/Net-AnywhereUSB/>
 
 =back
-
-=head1 ACKNOWLEDGEMENTS
 
 =head1 LICENSE AND COPYRIGHT
 
@@ -356,3 +372,5 @@ YOUR LOCAL LAW. UNLESS REQUIRED BY LAW, NO COPYRIGHT HOLDER OR
 CONTRIBUTOR WILL BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, OR
 CONSEQUENTIAL DAMAGES ARISING IN ANY WAY OUT OF THE USE OF THE PACKAGE,
 EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+=cut
