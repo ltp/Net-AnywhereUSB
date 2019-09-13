@@ -7,32 +7,32 @@ Net::AnywhereUSB - Simple Perl interface to Digi AnywhereUSB devices.
 This module provides a simple interface for monitoring Digi AnywhereUSB 
 devices.
 
-    ```perl
-    use Net::AnywhereUSB;
+```perl
+use Net::AnywhereUSB;
 
-    my $n = Net::AnywhereUSB->new(
-        username => 'root',
-        password => 'p@55w0rd',
-        server   => 'my-usb-anywhere-device.domian.com'
-    );
+my $n = Net::AnywhereUSB->new(
+    username => 'root',
+    password => 'p@55w0rd',
+    server   => 'my-usb-anywhere-device.domian.com'
+);
 
-    # Print some basic system information
-    my $sysinfo = $n->system_information();
-    printf( "Model: %s - Firmware: %s\nUptime: %s\n",
-            $sysinfo->model,
-            $sysinfo->firmware_version,
-            $sysinfo->up_time
-    );
+# Print some basic system information
+my $sysinfo = $n->system_information();
+printf( "Model: %s - Firmware: %s\nUptime: %s\n",
+        $sysinfo->model,
+        $sysinfo->firmware_version,
+        $sysinfo->up_time
+);
 
-    # Check and report on memory consumption
-    if ( ( ( $sysinfo->used_memory->value 
-             / $sysinfo->total_memory->value ) * 100 ) >= 85 ) {
-        print "Memory consumption exceeds 85%\n";
-        # send alert or take action ...
-    }
-    
-    ...
-    ```
+# Check and report on memory consumption
+if ( ( ( $sysinfo->used_memory->value 
+         / $sysinfo->total_memory->value ) * 100 ) >= 85 ) {
+    print "Memory consumption exceeds 85%\n";
+    # send alert or take action ...
+}
+
+...
+```
 
 ## METHODS
 
