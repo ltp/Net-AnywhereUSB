@@ -47,7 +47,7 @@ __END__
 
 =pod
 
-=name1 NAME
+=head1 NAME
 
 Net::AnywhereUSB::System::Summary - Utility class for representing system
 summary data returned from Digi AnywhereUSB devices.

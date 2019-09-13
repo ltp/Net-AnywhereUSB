@@ -19,7 +19,7 @@ if ( $@ ) {
 	plan skip_all => "Pod::Coverage $min_pc required for testing POD coverage"
 }
 else {
-	plan tests => 2
+	plan tests => 5
 }
 
 pod_coverage_ok( 'Net::AnywhereUSB' );
