@@ -30,7 +30,7 @@ sub units {
 	return $_[0]->{ units }
 }
 
-sub to_bits {
+sub as_bits {
 	my $self = shift;
 
 	if ( ( lc $self->{ units } ) eq 'b' ) {
