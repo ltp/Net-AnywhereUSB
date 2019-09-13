@@ -82,8 +82,8 @@ This module provides a utility class for representing observed network metrics
 as returned by a Digi AnywhereUSB device.
 
 Note that you should not instantiate objects of this class directly - rather
-objects of this class will returned when invoking methods in the 
-L<Net::AnywhereUSB> module.
+objects of this class will returned when invoking the network_information() 
+method in the L<Net::AnywhereUSB> module.
 
 =head1 METHODS
 
